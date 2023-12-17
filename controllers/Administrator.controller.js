@@ -58,7 +58,7 @@ exports.adminLogin = async (req, res) => {
       });
     }
 
-    let accessToken = createJsonWebToken({ email, password }, "6h");
+    let accessToken = createJsonWebToken({ email, password }, "5h");
 
     res.status(200).json({
       success: true,
