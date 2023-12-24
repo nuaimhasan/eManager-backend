@@ -22,6 +22,7 @@ const jobRoutes = require("./routes/job.routes");
 const jobApplyFormRoutes = require("./routes/JobApplyForm.routes");
 const jobBenefitRoutes = require("./routes/jobBenefit.routes");
 const contactEmailRoutes = require("./routes/contactEmail.routes");
+const teamRoutes = require("./routes/team.routes");
 
 const app = express();
 app.use(cors());
@@ -52,6 +53,7 @@ app.use("/job", jobRoutes);
 app.use("/jobApplyForm", jobApplyFormRoutes);
 app.use("/jobBenefit", jobBenefitRoutes);
 app.use("/contactEmail", contactEmailRoutes);
+app.use("/team", teamRoutes);
 
 app.get("/", (req, res) => {
   res.send(`Server is Running on port ${port}`);
