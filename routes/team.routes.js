@@ -23,6 +23,6 @@ router.get("/all-teamMembers", getAllTeamMembers);
 router.post("/add", upload.single("image"), addTeamMember);
 router.patch("/update/:id", upload.single("image"), updateTeamMember);
 router.delete("/delete/:id", deleteTeamMember);
-// router.get("/:id");
+router.get("/:id");
 
 module.exports = router;

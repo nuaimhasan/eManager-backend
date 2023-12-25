@@ -1,7 +1,7 @@
 const Mailgen = require("mailgen");
 const nodemailer = require("nodemailer");
 
-exports.mailSender = async ({ name, email, phone, subject, clientMessage }) => {
+exports.mailSender = async ({ name, email, phone, subject, message }) => {
   const configs = {
     host: "mail.emanagerit.com",
     port: 465,
@@ -45,7 +45,7 @@ exports.mailSender = async ({ name, email, phone, subject, clientMessage }) => {
           },
           {
             item: "Message",
-            description: clientMessage,
+            description: message,
           },
         ],
       },

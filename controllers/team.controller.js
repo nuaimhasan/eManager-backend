@@ -63,6 +63,31 @@ exports.getAllTeamMembers = async (req, res) => {
   }
 };
 
+exports.getTeamMemberById = async (req, res) => {
+  const id = req?.params?.id;
+
+  try {
+    const team = await Team.findById(id);
+
+    if (!team)
+      return res.status(404).json({
+        success: false,
+        message: "Team not found",
+      });
+
+    res.status(200).json({
+      success: true,
+      message: "Team found successfully",
+      data: team,
+    });
+  } catch (error) {
+    res.status(500).json({
+      success: false,
+      error: error.message,
+    });
+  }
+};
+
 exports.updateTeamMember = async (req, res) => {
   const file = req?.file?.filename;
   const id = req?.params?.id;
@@ -72,14 +97,13 @@ exports.updateTeamMember = async (req, res) => {
     const team = await Team.findById(id);
 
     if (!team) {
-      if(file){
-        fs.unlink(`./uploads/team/${file}`,(err) => {
+      if (file) {
+        fs.unlink(`./uploads/team/${file}`, (err) => {
           if (err) {
             console.error(err);
           }
         });
       }
-      
 
       return res.status(404).json({
         success: false,
@@ -131,19 +155,17 @@ exports.deleteTeamMember = async (req, res) => {
   try {
     const team = await Team.findById(id);
 
-    if (!team){
+    if (!team) {
       return res.status(404).json({
         success: false,
         error: "Team Member not found",
       });
     }
-      
 
     if (team?.image && `./uploads/team/${team?.image}`) {
       fs.unlink(`./uploads/team/${team?.image}`, (err) => {
         if (err) {
           console.error(err);
-          
         }
       });
     }
@@ -157,7 +179,7 @@ exports.deleteTeamMember = async (req, res) => {
   } catch (error) {
     res.status(500).json({
       success: false,
-      error:error.message,
+      error: error.message,
     });
   }
 };
